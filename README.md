@@ -1,8 +1,6 @@
 Installation guide
-
-1. extract files to 'modules' folder
-
-2. add folowing code to configuration files (protected/config/main.php)
+    1. extract files to 'modules' folder
+    2. add folowing code to configuration files (protected/config/main.php)
 
 'modules'=>array(
     ....
