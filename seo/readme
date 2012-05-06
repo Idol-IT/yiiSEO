@@ -1,0 +1,21 @@
+Инструкция по установке
+1. Распоковать в папку modules
+2. в config файле добавить следующие настройки
+'modules'=>array(
+    ....
+    'seo',
+),
+
+'components'=>array(
+    ....
+    'seo'=>array(
+        'class' => 'SeoExt',
+    ),
+),
+'import'=>array(
+    ....
+    'application.modules.seo.models.*',
+),
+
+3. В главном шаблоне вызвать
+    Yii::app()->seo->run();
