@@ -20,4 +20,5 @@ Installation guide
     ),
 
 3. Run following code in your main layout
-        Yii::app()->seo->run();
+
+	Yii::app()->seo->run();
