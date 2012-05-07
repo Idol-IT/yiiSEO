@@ -7,7 +7,6 @@ Installation
 1. extract files to 'modules' folder
 2. add folowing code to configuration files (protected/config/main.php)
 
-<<<<<<< HEAD
         'modules'=>array(
 			....
 			'seo',
@@ -23,29 +22,6 @@ Installation
 			....
 			'application.modules.seo.models.*',
 		),
-		
-=======
-
-
-
-
-    'modules'=>array(
-        ....
-        'seo',
-    ),
-    
-    'components'=>array(
-        ....
-        'seo'=>array(
-            'class' => 'SeoExt',
-        ),
-    ),
-    'import'=>array(
-        ....
-        'application.modules.seo.models.*',
-    ),
-
->>>>>>> 73bef5a2ce441015e41152330b7f67600df26da3
 3. Run following code in your main layout
 
 
