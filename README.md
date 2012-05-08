@@ -15,17 +15,18 @@ Installation
 		'components'=>array(
 			....
 			'seo'=>array(
-				'class' => 'SeoExt',
+				'class' => 'application.modules.seo.components.SeoExt',
 			),
 		),
 		'import'=>array(
 			....
 			'application.modules.seo.models.*',
 		),
-3. Run following code in your main layout
+3. Import SQL dump into your mySQL DB		
+
+4. Run following code in your main layout
+	
+	Yii::app()->seo->run();
 
 
-Example
-====================
-
-    Yii::app()->seo->run();
+    
