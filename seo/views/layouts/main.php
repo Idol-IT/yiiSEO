@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8">
-  <title>Adminity - Widgets</title>
+  <title>yiiSEO</title>
   <link rel="shortcut icon" href="favicon.gif">
     <?php
         $cs=Yii::app()->clientScript;
@@ -21,16 +21,12 @@
   <![endif]-->
 </head>
 <body>
-
   <!--- HEADER -->
-
   <div class="header">
    <a href="<?php echo Yii::app()->createUrl("seo/")?>"><img src="<?php echo $this->module->assetsUrl?>/img/logo.png" alt="Logo" /></a>
   </div>
 
-
   <!--- CONTENT AREA -->
-
   <div class="content container_12">
       <?php if (Yii::app()->user->hasFlash('error')){ ?>
           <div class="ad-notif-error grid_12 small-mg"><p><?php echo Yii::app()->user->getFlash('error'); ?></p></div>
@@ -42,13 +38,8 @@
       <?php echo $content;?>
   </div>
 
-<div class="footer container_12">
-  <p class="grid_12">Idol IT</p>
-</div>
-
-
-
+  <div class="footer container_12">
+    <p class="grid_12">Idol IT</p>
+  </div>
 </body>
-
-
 </html>
