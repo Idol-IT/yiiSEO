@@ -1,4 +1,12 @@
 <?php
+/**
+ * DefaultController class file
+ *
+ * @author Ivan Suvorov <ivan@idol-studio.com>
+ * @link http://idol-it.com/
+ * @copyright Copyright &copy; 2012 Idol-IT
+ * @license BSD licence
+ */
 
 class DefaultController extends Controller
 {

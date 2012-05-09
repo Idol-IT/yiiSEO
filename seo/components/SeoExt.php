@@ -1,33 +1,36 @@
 <?php
+/**
+ * SeoExt class file
+ *
+ * @author Ivan Suvorov <ivan@idol-studio.com>
+ * @link http://idol-it.com/
+ * @copyright Copyright &copy; 2012 Idol-IT
+ * @license BSD licence
+ */
 
 class SeoExt extends CApplicationComponent
 {
-    /* список параметром SEO по умолчанию */
+    /* SEO param list */
     public $types = array('title','keywords','description');
 
     public function run($settypes = null,$language = null){
-        /* проверка на список параметров переданых при инициализации
-        если пустой то используем поумолчанию
-         */
+        /* if no param list is set during initialization, then uses default param list */
         if(count($settypes))
         {
             foreach($settypes as $type)
                 $this->seotag($type,$language);
-        }
-        else{
+        } else{
             foreach($this->types as $type)
                 $this->seotag($type,$language);
         }
-
     }
 
     /*
-    $tag - тип мета тега (title, keywords, description и тд.)
-    $language - язык, если он есть
+    $tag - meta tag type (title, keywords, description)
+    $language - language, if exists
     */
     public function seotag($tag, $language = null)
     {
-        /* получаем список ссылок по иерархии */
         $urls = $this->getUrls();
 
         $crt = new CDbCriteria();
@@ -38,9 +41,6 @@ class SeoExt extends CApplicationComponent
             $crt->addCondition("language = '".$language."'",'AND');
         }
 
-        /*
-        для каждой из сылок ищем нахождение в БД до тех пор пока не найдено
-        */
         $seoRes = null;
         foreach($urls as $url)
         {
@@ -51,25 +51,18 @@ class SeoExt extends CApplicationComponent
                 break;
         }
 
-        /*
-        если есть результат, то сохраняем его
-        */
+        /* save if there is result */
         if(count($seoRes)){
             $content = $seoRes->content;
             if($seoRes->param != null)
-            {
                 $content .= $this->getSeoparam($seoRes->param);
-            }
-            /*
-            выводим на META
-            */
+
+
             $this->printMeta($tag,$content);
         }
-
-
-
     }
 
+    /* getting url list */
     private function getUrls()
     {
         $result = null;
@@ -97,11 +90,12 @@ class SeoExt extends CApplicationComponent
         return $result;
     }
 
+    /* printing Meta data */
     private function printMeta($tag,$content)
     {
         if($tag == "title")
             echo "<title>$content</title>";
-        else{
+        else {
             echo "<meta name='$tag' content='$content' />";
         }
     }
@@ -120,10 +114,7 @@ class SeoExt extends CApplicationComponent
             if(count($item)){
                 return $item[$param[1]];
             }
-        }
-
-        else
+        } else
             return "";
-
     }
 }
