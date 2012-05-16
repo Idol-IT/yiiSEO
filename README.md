@@ -16,10 +16,10 @@ __Features :__
 
 __Requirments :__
 	
-	`'urlManager'=>array(
+	'urlManager'=>array(
             'urlFormat'=>'path',
             'showScriptName'=>false,
-	),`
+	),
 
 Installation
 ---------------------
