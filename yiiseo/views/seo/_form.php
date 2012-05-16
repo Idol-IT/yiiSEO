@@ -62,7 +62,7 @@
 	</div>
 
     <div class="row buttons">
-        <?php echo CHtml::button("add meta property",array('class'=>"meta-property","data-count"=>0)); ?>
+        <?php echo CHtml::button("add meta property",array('class'=>"meta-property","data-count"=>count($model->yiiseoProperties))); ?>
 	</div>
 
     <div class="row buttons">
