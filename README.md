@@ -1,8 +1,8 @@
 yiiSEO v2.0
-========
+====================
 
-Descriptin
-========
+Description
+---------------------
 
 YiiSEO has been completely refactored. It is lot more flexible and now you can make almost any SEO changes without
 changing your code.
@@ -14,7 +14,7 @@ Features :
 - uses inverse hierarchy to find meta data
 
 Installation
-=========
+---------------------
 
 1. Unpack 'yiiseo' folder to '/protected/modules/'
 2. Add folowing code to configuration files (protected/config/main.php)
