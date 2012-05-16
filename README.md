@@ -14,7 +14,7 @@ __Features :__
 - uses inverse hierarchy to find meta data
 
 
-__Requirments :__
+__Requirments :__ update your URLManager in /protected/config/main.php this way
 	
 	'urlManager'=>array(
             'urlFormat'=>'path',
