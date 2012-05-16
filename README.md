@@ -39,11 +39,9 @@ Installation
 3.Run following line of code that suits you into your main layouts head :
 
 - In case the site has one language:
-	
 	`Yii::app()->seo->run();`
 
 - In case when site is multilingual:
-        
 	`Yii::app()->seo->run(Yii::app()->language);`
 
 4.Import yiiseo/data/yiiseo.sql into your mySQL database
