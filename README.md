@@ -20,19 +20,21 @@ Installation
 2. Add folowing code to configuration files (protected/config/main.php)
 
         'modules'=>array(
-	    ....
-	    'yiiseo',
-	),
-	'components'=>array(
-	    ....
-	    'seo'=>array(
-	        'class' => 'application.modules.yiiseo.components.SeoExt',
-	    ),
-	),
-	'import'=>array(
-	    ....
-	    'application.modules.yiiseo.models.*',
-	),
+        	....
+        	'yiiseo',
+        ),
+        
+        'components'=>array(
+        	....
+        	'seo'=>array(
+        	'class' => 'application.modules.yiiseo.components.SeoExt',
+        	),
+        ),
+        
+        'import'=>array(
+        	....
+        	'application.modules.yiiseo.models.*',
+        ),
 	
 3.Run following line of code that suits you into your main layout (somewhere in head 
 
