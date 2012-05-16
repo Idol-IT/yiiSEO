@@ -40,11 +40,11 @@ Installation
 
 - In case the site has one language:
 	
-	Yii::app()->seo->run();
+	`Yii::app()->seo->run();`
 
 - In case when site is multilingual:
         
-	Yii::app()->seo->run(Yii::app()->language);
+	`Yii::app()->seo->run(Yii::app()->language);`
 
 4.Import yiiseo/data/yiiseo.sql into your mySQL database
 
