@@ -7,7 +7,7 @@ Description
 YiiSEO has been completely refactored. It is lot more flexible and now you can make almost any SEO changes without
 changing your code.
 
-Features :
+__Features :__
 
 - single language and multi-language site support
 - can be used to add author meta, FB meta and many more
