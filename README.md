@@ -13,6 +13,14 @@ __Features :__
 - can be used to add author meta, FB meta and many more
 - uses inverse hierarchy to find meta data
 
+
+__Requirments :__
+	
+	`'urlManager'=>array(
+            'urlFormat'=>'path',
+            'showScriptName'=>false,
+	),`
+
 Installation
 ---------------------
 
