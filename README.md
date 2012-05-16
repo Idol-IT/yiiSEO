@@ -1,48 +1,56 @@
-yiiSEO
+yiiSEO v2.0
 ========
+
+Descriptin
+========
+
+YiiSEO has been completely refactored. It is lot more flexible and now you can make almost any SEO changes without
+changing your code.
+
+Features :
+
+- single language and multi-language site support
+- can be used to add author meta, FB meta and many more
+- uses inverse hierarchy to find meta data
 
 Installation
 =========
 
-1. Extract files to 'modules' folder
+1. Unpack 'yiiseo' folder to '/protected/modules/'
 2. Add folowing code to configuration files (protected/config/main.php)
 
         'modules'=>array(
-			....
-			'seo',
-		),
-		
-		'components'=>array(
-			....
-			'seo'=>array(
-				'class' => 'application.modules.seo.components.SeoExt',
-			),
-		),
-		'import'=>array(
-			....
-			'application.modules.seo.models.*',
-		),
-3. Import SQL dump into your mySQL DB		
+	    ....
+	    'yiiseo',
+	),
+	
+	'components'=>array(
+	    ....
+	    'seo'=>array(
+	        'class' => 'application.modules.yiiseo.components.SeoExt',
+	    ),
+	),
+	'import'=>array(
+	    ....
+	    'application.modules.yiiseo.models.*',
+	),
+3.Run following line of code that suits you into your main layout (somewhere in head 
 
-4. Run following code in your main layout
+section)
 
-	    Yii::app()->seo->run();
+In case the site has one language:
 
-Usage
-=========
+	Yii::app()->seo->run();
 
-http://yoursite.com/seo
+In case when site is multilingual
+        Yii::app()->seo->run(Yii::app()->language);
 
-type - title/description/keywords
+4.Import yiiseo/data/yiiseo.sql into your mySQL database
 
-url - relative url (example1 : 'products/index', not '/products/index'), (example2 : 'products/view/*' - where '*'
-is the place where goes the param)
+5. Run module by typing in the link http://yoursite.com/yiiseo/
 
-content - text that goes in meta
-
-language - set language for which this meta data is true in your website
-
-is_active - true/false (false - means it doesn't display on website)
+The password for module is '1'.You can change it in following file :
+    application.modules.yiiseo.components.UserIdentity
 
 
     
