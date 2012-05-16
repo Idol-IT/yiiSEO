@@ -78,7 +78,7 @@ class SeoController extends Controller
 			if($model->save())
             {
                 /* save MetaName */
-                if(isset($_POST['YiiseoProperty']))
+                if(isset($_POST['YiiseoMain']))
                 {
                     $items = $_POST['YiiseoMain'];
                     foreach($items as $name=>$item)
@@ -162,7 +162,7 @@ class SeoController extends Controller
             if($model->save())
             {
                 /* save or update MetaName */
-                if(isset($_POST['YiiseoProperty']))
+                if(isset($_POST['YiiseoMain']))
                 {
                     $items = $_POST['YiiseoMain'];
                     foreach($items as $name=>$item)
