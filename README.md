@@ -23,7 +23,6 @@ Installation
 	    ....
 	    'yiiseo',
 	),
-	
 	'components'=>array(
 	    ....
 	    'seo'=>array(
@@ -34,6 +33,7 @@ Installation
 	    ....
 	    'application.modules.yiiseo.models.*',
 	),
+	
 3.Run following line of code that suits you into your main layout (somewhere in head 
 
 section)
