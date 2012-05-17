@@ -54,5 +54,8 @@ Installation
 
 4.Run module by typing in the link : http://yoursite.com/yiiseo/
 
-Contact us at : http://idol-it.com
+Contacts
+---------------------
+Idol-IT develop team : http://idol-it.com
+Yii framework extension : http://www.yiiframework.com/extension/yii-seo
     
