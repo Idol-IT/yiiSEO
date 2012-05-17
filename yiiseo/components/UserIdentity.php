@@ -8,7 +8,7 @@ class UserIdentity extends CUserIdentity
 	 */
 	public function authenticate()
 	{
-		$password="1";
+		$password=Yii::app()->getModule('yiiseo')->password;
 		if($password===null)
 			throw new CException('Please configure the "password" property of the "gii" module.');
 		else if($password===false || $password===$this->password)

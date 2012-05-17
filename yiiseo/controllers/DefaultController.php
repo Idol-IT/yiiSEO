@@ -6,6 +6,7 @@ class DefaultController extends Controller
 
     public function actionIndex()
     {
+        $this->verifyTable();
         $this->redirect(Yii::app()->createUrl("yiiseo/seo/"));
     }
 
@@ -25,6 +26,7 @@ class DefaultController extends Controller
      */
     public function actionLogin()
     {
+        $this->verifyTable();
         $model=Yii::createComponent('yiiseo.models.LoginForm');
 
         // collect user input data
@@ -44,7 +46,43 @@ class DefaultController extends Controller
      */
     public function actionLogout()
     {
-        Yii::app()->user->logout(false);
+        Yii::app()->userseo->logout(false);
         $this->redirect(Yii::app()->createUrl('yiiseo/seo/index'));
+    }
+
+    public function verifyTable()
+    {
+
+        if (!Yii::app()->getDb()->schema->getTable('yiiseo_url')) {
+            Yii::app()->getDb()->createCommand()->createTable("yiiseo_url", array(
+                'id' => 'pk',
+                'url' => 'text',
+                'language' => 'string',
+            ),'ENGINE=InnoDB');
+        }
+
+        if (!Yii::app()->getDb()->schema->getTable('yiiseo_main')) {
+            Yii::app()->getDb()->createCommand()->createTable("yiiseo_main", array(
+                'id' => 'pk',
+                'url' => 'integer',
+                'name' => 'string',
+                'content' => 'text',
+                'param' => 'text',
+                'active' => 'boolean',
+            ),'ENGINE=InnoDB');
+            Yii::app()->getDb()->createCommand()->addForeignKey('url', 'yiiseo_main', 'url','yiiseo_url', 'id', 'CASCADE', 'CASCADE');
+        }
+
+        if (!Yii::app()->getDb()->schema->getTable('yiiseo_property')) {
+            Yii::app()->getDb()->createCommand()->createTable("yiiseo_property", array(
+                'id' => 'pk',
+                'url' => 'integer',
+                'name' => 'string',
+                'content' => 'text',
+                'param' => 'text',
+            ),'ENGINE=InnoDB');
+            Yii::app()->getDb()->createCommand()->addForeignKey('url1', 'yiiseo_property', 'url','yiiseo_url', 'id', 'CASCADE', 'CASCADE');
+        }
+
     }
 }

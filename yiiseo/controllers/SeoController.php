@@ -26,32 +26,13 @@ class SeoController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','addmetaname',"deletemetaname","addmetaproperty","deletemetaproperty"),
-				'users'=>array('*'),
-			),
-			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update'),
-				'users'=>array('@'),
-			),
-			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete'),
-				'users'=>array('seoyii'),
+				'actions'=>array('index','view','addmetaname',"deletemetaname","addmetaproperty","deletemetaproperty",'create','update','admin','delete'),
+                'expression'=>'isset(Yii::app()->userseo->name)',
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
 			),
 		);
-	}
-
-	/**
-	 * Displays a particular model.
-	 * @param integer $id the ID of the model to be displayed
-	 */
-	public function actionView($id)
-	{
-		$this->render('view',array(
-			'model'=>$this->loadModel($id),
-		));
 	}
 
 	/**
@@ -240,6 +221,7 @@ class SeoController extends Controller
 	 */
 	public function actionIndex()
 	{
+
 		$model=new YiiseoUrl('search');
 		$model->unsetAttributes();  // clear any default values
 		if(isset($_GET['YiiseoUrl']))
@@ -345,48 +327,53 @@ class SeoController extends Controller
         $models = $this->getModels();
         $params= null;
         $i = 0;
+
         if(count($models)){
-            foreach($models as $model){
-                $item = new $model;
+            foreach ($models as $model) {
+
+                $modelNew = new $model(null);
                 /* проверяем существует ли в данном классе функция "tableName"
                 * если она существует, то скорее всего эта модель CActiveRecord
                 * таким образом отсеиваем модели, которые были предназначены для валидации форм не работающих с Базой Данных
                 */
-                if(method_exists ( $item , "tableName"))
-                {
-                    if(count($item)){
-                        foreach($item as $attr=>$val){
+                if (method_exists($modelNew, "tableName")) {
+
+                    $tableName = $modelNew->tableName();
+
+                    if (($table = $modelNew->getDbConnection()->getSchema()->getTable($tableName)) !== null) {
+                        $item = new $model;
+
+                        foreach ($item as $attr => $val) {
                             $params[$i]['group'] = $model;
                             $params[$i]['name'] = $attr;
-                            $params[$i++]['value'] = $model.'/'.$attr;
+                            $params[$i++]['value'] = $model . '/' . $attr;
                         }
-                    }
-                    /*
-                    * проверяем есть ли связи у данной модели
-                    */
-                    if(method_exists ( $item , "relations"))
-                    {
-                        if(count($item->relations()))
-                        {
-                            $relation = $item->relations();
-                            foreach($relation as $key=>$rel)
-                            {
-                                /*
-                                * выбираем связи один к одному или многие к одному
-                                */
-                                if(($rel[0] == "CHasOneRelation") || ($rel[0] == "CBelongsToRelation"))
+                        /*
+                        * проверяем есть ли связи у данной модели
+                        */
+                        if (method_exists($item, "relations")) {
+                            if (count($item->relations())) {
+                                $relation = $item->relations();
+                                foreach ($relation as $key => $rel)
                                 {
-                                    $newRel = new $rel[1];
-                                    foreach($newRel as $attr=>$nR){
-                                        $params[$i]['group'] = $model;
-                                        $params[$i]['name'] = $key.">>".$attr;
-                                        $params[$i++]['value'] =  $model."/".$key.">>".$attr;
+                                    /*
+                                    * выбираем связи один к одному или многие к одному
+                                    */
+                                    if (($rel[0] == "CHasOneRelation") || ($rel[0] == "CBelongsToRelation")) {
+                                        $newRel = new $rel[1];
+                                        foreach ($newRel as $attr => $nR) {
+                                            $params[$i]['group'] = $model;
+                                            $params[$i]['name'] = $key . ">>" . $attr;
+                                            $params[$i++]['value'] = $model . "/" . $key . ">>" . $attr;
+                                        }
                                     }
                                 }
                             }
                         }
                     }
                 }
+
+
             }
             /*
             * если есть модели работающие с базой то возвращаем массив данных

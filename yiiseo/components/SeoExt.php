@@ -6,6 +6,7 @@ class SeoExt extends CApplicationComponent
     public $exist = array();
 
     public function run($language = null){
+        $this->verifyTable();
         /*
          * получаем все возможные сслыки по Иерархии
          * Пример: исходная ссылка "site/product/type/34"
@@ -166,10 +167,13 @@ class SeoExt extends CApplicationComponent
      */
     private function printMeta($name,$content)
     {
+        $content = strip_tags($content);
+        if($name == "keywords")
+            $content = str_replace (',', ", ", $content);
         if($name == "title")
-            echo "<title>$content</title>";
+            echo "<title>$content</title>\n";
         else{
-            echo "<meta name='$name' content='$content' />";
+            echo "<meta name='$name' content='$content' />\n";
         }
     }
 
@@ -180,7 +184,8 @@ class SeoExt extends CApplicationComponent
     */
     private function printProperty($name,$content)
     {
-        echo "<meta property='$name' content='$content' />";
+        $content = strip_tags($content);
+        echo "<meta property='$name' content='$content' />\n";
     }
 
     /*
@@ -249,5 +254,41 @@ class SeoExt extends CApplicationComponent
             else
                 return "";
         }
+    }
+
+    public function verifyTable()
+    {
+        
+        if (!Yii::app()->getDb()->schema->getTable('yiiseo_url')) {
+            Yii::app()->getDb()->createCommand()->createTable("yiiseo_url", array(
+                'id' => 'pk',
+                'url' => 'text',
+                'language' => 'string',
+            ),'ENGINE=InnoDB');
+        }
+
+        if (!Yii::app()->getDb()->schema->getTable('yiiseo_main')) {
+            Yii::app()->getDb()->createCommand()->createTable("yiiseo_main", array(
+                'id' => 'pk',
+                'url' => 'integer',
+                'name' => 'string',
+                'content' => 'text',
+                'param' => 'text',
+                'active' => 'boolean',
+            ),'ENGINE=InnoDB');
+            Yii::app()->getDb()->createCommand()->addForeignKey('url', 'yiiseo_main', 'url','yiiseo_url', 'id', 'CASCADE', 'CASCADE');
+        }
+
+        if (!Yii::app()->getDb()->schema->getTable('yiiseo_property')) {
+            Yii::app()->getDb()->createCommand()->createTable("yiiseo_property", array(
+                'id' => 'pk',
+                'url' => 'integer',
+                'name' => 'string',
+                'content' => 'text',
+                'param' => 'text',
+            ),'ENGINE=InnoDB');
+            Yii::app()->getDb()->createCommand()->addForeignKey('url1', 'yiiseo_property', 'url','yiiseo_url', 'id', 'CASCADE', 'CASCADE');
+        }
+
     }
 }

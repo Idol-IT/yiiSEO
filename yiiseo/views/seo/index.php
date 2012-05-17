@@ -7,6 +7,7 @@ $this->breadcrumbs=array(
 $this->menu=array(
 	array('label'=>'List YiiseoUrl', 'url'=>array('index')),
 	array('label'=>'Create YiiseoUrl', 'url'=>array('create')),
+	array('label'=>'Logout', 'url'=>Yii::app()->createUrl("yiiseo/default/logout")),
 );
 
 ?>

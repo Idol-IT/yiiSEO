@@ -12,7 +12,7 @@ class YiiseoModule extends CWebModule
                 'class'=>'CErrorHandler',
                 'errorAction'=>$this->getId().'/default/error',
             ),
-            'user'=>array(
+            'userseo'=>array(
                 'class'=>'CWebUser',
                 'stateKeyPrefix'=>'seo',
                 'loginUrl'=>Yii::app()->createUrl($this->getId().'/default/login'),
@@ -35,8 +35,8 @@ class YiiseoModule extends CWebModule
             'default/login',
             'default/error',
         );
-        if($this->password!==false && Yii::app()->user->isGuest && !in_array($route,$publicPages))
-            Yii::app()->user->loginRequired();
+        if($this->password!==false && Yii::app()->userseo->isGuest && !in_array($route,$publicPages))
+            Yii::app()->userseo->loginRequired();
         else
             return true;
     }
