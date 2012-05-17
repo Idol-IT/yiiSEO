@@ -1,11 +1,11 @@
-yiiSEO v2.0
+yiiSEO v2.2
 ====================
 
 Description
 ---------------------
 
 YiiSEO has been completely refactored. It is lot more flexible and now you can make almost any SEO changes without
-changing your code.
+changing your code. Last updated 17.05.2012
 
 __Features :__
 
@@ -27,10 +27,10 @@ Installation
 1. Unpack 'yiiseo' folder to '/protected/modules/'
 2. Add folowing code to configuration files (protected/config/main.php)
 
-        'modules'=>array(
-        	....
-        	'yiiseo',
-        ),
+        'yiiseo'=>array(
+        	'class'=>'application.modules.yiiseo.YiiseoModule',
+        	'password'=>'111', // your default password is 111
+    	),
         
         'components'=>array(
         	....
@@ -52,12 +52,7 @@ Installation
 - In case when site is multilingual:
 	`Yii::app()->seo->run(Yii::app()->language);`
 
-4.Import yiiseo/data/yiiseo.sql into your mySQL database
+4.Run module by typing in the link : http://yoursite.com/yiiseo/
 
-5.Run module by typing in the link : http://yoursite.com/yiiseo/
-
-The password for module is '1'.You can change it in following file :
-    application.modules.yiiseo.components.UserIdentity
-
-
+Contact us at : http://idol-it.com
     
