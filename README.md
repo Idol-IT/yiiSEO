@@ -57,5 +57,6 @@ Installation
 Contacts
 ---------------------
 Idol-IT develop team : http://idol-it.com
+
 Yii framework extension : http://www.yiiframework.com/extension/yii-seo
     
