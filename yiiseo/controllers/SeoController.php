@@ -300,7 +300,7 @@ class SeoController extends Controller
     public function getModels()
     {
         //путь к директории с проектами
-        $file_list = scandir($_SERVER['DOCUMENT_ROOT']."/protected/models");
+        $file_list = scandir(Yii::getPathOfAlias('application.models'));
         //$file_list = scandir('/var/www/vhosts/powerteam.md/public_html/protected/models');
         $models = null;
         //если найдены файлы
