@@ -173,7 +173,7 @@ class SeoExt extends CApplicationComponent
         if($name == "title")
             echo "<title>$content</title>\n";
         else{
-            echo "<meta name='$name' content='$content' />\n";
+			Yii::app()->clientScript->registerMetaTag($content, $name);
         }
     }
 
