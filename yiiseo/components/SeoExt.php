@@ -22,43 +22,38 @@ class SeoExt extends CApplicationComponent
                         - /
          */
         $urls = $this->getUrls();
+        $urlsCommaSeparated = implode("','",$urls); 
 
+        $crt = new CDbCriteria();
+		$crt->order = "FIELD(t.url,'{$urlsCommaSeparated}')";
 
-        foreach($urls as $url)
-        {
-            $crt = new CDbCriteria();
-            $crt->condition = "url = :param";
-            $crt->params = array(":param"=>$url);
-            if($language != null)
-                $crt->addCondition("language = '".$language."'",'AND');
-
-            $urlF = YiiseoUrl::model()->find($crt);
-            if($urlF !== null){
-                $this->seoName($urlF->id);
-            }
-        }
+		if($language != null)
+		{
+			$crt->condition = "language = :language";
+			$urls = YiiseoUrl::model()->findAllByAttributes(array("url"=>$urls), $crt, array(":language" => $language));
+		}
+		else
+			$dbUrls = YiiseoUrl::model()->findAllByAttributes(array("url"=>$urls), $crt);
 
         $propertyExist = YiiseoProperty::model()->findAll();
+					
+		foreach($dbUrls as $urlF)
+		{
+            if($urlF !== null)
+                $this->seoName($urlF->id);
+		}
+
         if(count($propertyExist))
         {
             $boolean = false;
-            foreach($urls as $url)
-            {
-                $crt = new CDbCriteria();
-                $crt->condition = "url = :param";
-                $crt->params = array(":param"=>$url);
-                if($language != null)
-                    $crt->addCondition("language = '".$language."'",'AND');
-
-                $urlF = YiiseoUrl::model()->find($crt);
-                if($urlF !== null)
+			foreach($dbUrls as $urlF)
+			{
+	            if($urlF !== null)
                     $boolean = $this->seoProperty($urlF->id);
 
                 if($boolean) break;
-
-            }
-        }
-
+			}
+		}
     }
 
     /*
