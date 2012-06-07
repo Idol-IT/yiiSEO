@@ -6,6 +6,16 @@
         $cs->registerScriptFile($baseUrl.'/js/yiiseo.js');
         $cs->registerCssFile($baseUrl.'/css/tags.css');
         $cs->registerCssFile($baseUrl.'/img/close.png');
+        
+        $deleteMsg = Yii::t('yiiseo','Вы действительно хотите удалить элемент?');
+        $changeMetaNameMsg = Yii::t('yiiseo','Change Meta Name');
+        
+        $js=<<<THEEND
+        	deleteMsg = "{$deleteMsg}";
+        	changeMetaNameMsg = "{$changeMetaNameMsg}";
+THEEND;
+
+		$cs->registerScript('messages',$js);
     ?>
 <div class="form">
 

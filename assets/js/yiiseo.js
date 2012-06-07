@@ -4,7 +4,7 @@ $(document).ready(function(){
     $(".meta-name").live("click",function(){
         var name = $("#name").val();
         if(name == "")
-            alert("Change Meta Name");
+            alert(changeMetaNameMsg);
         else{
             $.ajax( {
                 url: '/yiiseo/seo/addmetaname',
@@ -18,7 +18,7 @@ $(document).ready(function(){
     });
 
     $(".deleteblock").live("click",function(){
-        var ptr = confirm('Вы действительно хотите удалить элемент?');
+        var ptr = confirm(deleteMsg);
         if(ptr){
             var id = $(this).data("id");
             console.log(id);
@@ -62,7 +62,7 @@ $(document).ready(function(){
 
 
     $(".deleteproperty").live("click",function(){
-        var ptr = confirm('Вы действительно хотите удалить элемент?');
+        var ptr = confirm(deleteMsg);
         if(ptr){
             var id = $(this).data("id");
             console.log(id);
