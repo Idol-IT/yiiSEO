@@ -310,7 +310,7 @@ class SeoController extends Controller
             {
                 $ext = explode(".",$file);
                 //проверяем чтобы модели были с расширением php
-                if($ext[1] == "php")
+                if(isset($ext[1]) && $ext[1] == "php")
                 {
                     $models[] = $ext[0];
                 }
